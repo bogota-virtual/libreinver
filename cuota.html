@@ -207,6 +207,9 @@
                 <option value="cuota3">Cuota 3</option>
             </select>
 
+            <label for="montoPrestado">Monto Prestado:</label>
+            <input type="number" id="montoPrestado" name="montoPrestado" placeholder="Ej. 1000" required>
+
             <button type="submit">Guardar Pago</button>
         </form>
     </section>
@@ -222,7 +225,9 @@
             <thead>
                 <tr>
                     <th>Deudor</th>
-                    <th>Monto pendiente</th>
+                    <th>Monto prestado</th>
+                    <th>Cuota diaria</th>
+                    <th>Saldo pendiente</th>
                     <th>Monto pagado</th>
                     <th>Saldo total</th>
                 </tr>
@@ -250,9 +255,11 @@
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${pago.deudor}</td>
-                    <td>$${pago.montoPendiente}</td>
+                    <td>$${pago.montoPrestado}</td>
+                    <td>$${(pago.montoPrestado / pago.cuotas).toFixed(2)}</td>
+                    <td>$${pago.saldoPendiente.toFixed(2)}</td>
                     <td>$${pago.montoPagado}</td>
-                    <td>$${pago.saldoTotal}</td>
+                    <td>$${pago.saldoTotal.toFixed(2)}</td>
                 `;
                 tbody.appendChild(row);
             });
@@ -266,15 +273,21 @@
             const monto = parseFloat(document.getElementById("monto").value);
             const fecha = document.getElementById("fecha").value;
             const cuota = document.getElementById("cuota").value;
+            const montoPrestado = parseFloat(document.getElementById("montoPrestado").value);
+
+            // Calcular el saldo pendiente
+            const cuotaDiaria = montoPrestado / 30; // Suponemos que el plazo es de 30 días
+            const saldoPendiente = montoPrestado - monto; // Restamos lo que se pagó de lo prestado
 
             // Crear un nuevo objeto de pago
             const pago = {
                 deudor,
-                montoPendiente: monto,
-                montoPagado: 0, // Asumimos que el pago inicial es 0
-                saldoTotal: monto,
-                fecha,
-                cuota
+                montoPrestado,
+                cuotas: 30, // Suponemos que el préstamo tiene 30 cuotas
+                cuotaDiaria,
+                saldoPendiente,
+                montoPagado: monto,
+                saldoTotal: saldoPendiente
             };
 
             // Agregar el pago al arreglo de pagos
@@ -289,4 +302,5 @@
     </script>
 </body>
 </html>
+
 
