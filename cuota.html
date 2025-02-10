@@ -235,6 +235,7 @@
                     <th>Saldo Restante</th>
                     <th>Cuota Diaria</th>
                     <th>Pagos Realizados</th>
+                    <th>Fechas de Pagos</th>
                 </tr>
             </thead>
             <tbody>
@@ -273,6 +274,8 @@
             tbody.innerHTML = ""; // Limpiar la tabla antes de actualizar
 
             clientes.forEach(cliente => {
+                const pagosFechas = cliente.historialPagos.map(pago => pago.fecha).join(", ");
+
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${cliente.nombre}</td>
@@ -280,6 +283,7 @@
                     <td>$${cliente.saldoRestante}</td>
                     <td>$${cliente.cuotaDiaria}</td>
                     <td>${cliente.historialPagos.length} pagos</td>
+                    <td>${pagosFechas}</td>
                 `;
                 tbody.appendChild(row);
             });
@@ -321,6 +325,42 @@
         });
 
         // Manejo del formulario de pago
-        document.getElementById("formPago").addEventListener("submit
+        document.getElementById("formPago").addEventListener("submit", function(event) {
+            event.preventDefault();
 
+            const nombreCliente = document.getElementById("cliente").value;
+            const montoPago = parseFloat(document.getElementById("montoPago").value);
+            const fechaPago = document.getElementById("fechaPago").value;
+
+            // Buscar el cliente seleccionado
+            const cliente = clientes.find(c => c.nombre === nombreCliente);
+
+            if (cliente) {
+                // Restar el pago al saldo restante
+                cliente.saldoRestante -= montoPago;
+
+                // Registrar el pago con la fecha
+                const pago = {
+                    monto: montoPago,
+                    fecha: fechaPago
+                };
+                cliente.historialPagos.push(pago);
+
+                // Limpiar el formulario
+                document.getElementById("formPago").reset();
+
+                // Guardar los clientes en localStorage
+                guardarClientes();
+
+                // Actualizar la lista de clientes y la tabla
+                actualizarClientes();
+            }
+        });
+
+        // Al cargar la página, actualizar los datos
+        actualizarClientes();
+
+    </script>
+</body>
+</html>
 
