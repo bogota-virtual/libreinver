@@ -314,7 +314,13 @@
 </footer>
 
 <script>
-    // Código JavaScript para manejar los formularios, el almacenamiento en localStorage y la funcionalidad desplegable
+    // Formatear un número como moneda en COP (Pesos colombianos)
+    function formatearCOP(valor) {
+        return new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP'
+        }).format(valor);
+    }
 
     let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
@@ -325,7 +331,7 @@
         clientes.forEach(cliente => {
             const option = document.createElement("option");
             option.value = cliente.nombre;
-            option.textContent = `${cliente.nombre} - Saldo: $${cliente.saldoRestante}`;
+            option.textContent = `${cliente.nombre} - Saldo: ${formatearCOP(cliente.saldoRestante)}`;
             selectCliente.appendChild(option);
         });
 
@@ -341,9 +347,9 @@
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${cliente.nombre}</td>
-                <td>$${cliente.saldoInicial}</td>
-                <td class="saldo-restante">$${cliente.saldoRestante}</td>
-                <td>$${cliente.cuotaDiaria}</td>
+                <td>${formatearCOP(cliente.saldoInicial)}</td>
+                <td class="saldo-restante">${formatearCOP(cliente.saldoRestante)}</td>
+                <td>${formatearCOP(cliente.cuotaDiaria)}</td>
                 <td>${cliente.historialPagos.length} pagos</td>
                 <td>${pagosFechas}</td>
             `;
@@ -415,4 +421,3 @@
 
 </body>
 </html>
-
