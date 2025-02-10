@@ -235,6 +235,18 @@
             font-weight: bold;
         }
 
+        /* Estilo para edición de valores */
+        .editable {
+            background-color: #fffbe7;
+            border: 1px solid #f5c301;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .editable:focus {
+            outline: 2px solid #00bcd4;
+        }
     </style>
 </head>
 <body>
@@ -314,8 +326,6 @@
 </footer>
 
 <script>
-    // Código JavaScript para manejar los formularios, el almacenamiento en localStorage y la funcionalidad desplegable
-
     let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
     function actualizarClientes() {
@@ -337,18 +347,38 @@
         tbody.innerHTML = "";
 
         clientes.forEach(cliente => {
-            const pagosFechas = cliente.historialPagos.map(pago => `<span class="fecha-pago">${pago.fecha}</span>`).join(", ");
+            const pagosFechas = cliente.historialPagos.map(pago => `
+                <span class="fecha-pago" onclick="verDetallesPago('${cliente.nombre}', '${pago.fecha}')">${pago.fecha}</span>
+            `).join(", ");
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${cliente.nombre}</td>
-                <td>$${cliente.saldoInicial}</td>
+                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'nombre', this.innerText)">${cliente.nombre}</td>
+                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'saldoInicial', parseFloat(this.innerText))">${cliente.saldoInicial}</td>
                 <td class="saldo-restante">$${cliente.saldoRestante}</td>
-                <td>$${cliente.cuotaDiaria}</td>
+                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'cuotaDiaria', parseFloat(this.innerText))">${cliente.cuotaDiaria}</td>
                 <td>${cliente.historialPagos.length} pagos</td>
                 <td>${pagosFechas}</td>
             `;
             tbody.appendChild(row);
         });
+    }
+
+    function editarCliente(nombre, campo, valor) {
+        const cliente = clientes.find(c => c.nombre === nombre);
+        if (cliente) {
+            cliente[campo] = valor;
+            guardarClientes();
+        }
+    }
+
+    function verDetallesPago(clienteNombre, fecha) {
+        const cliente = clientes.find(c => c.nombre === clienteNombre);
+        if (cliente) {
+            const pago = cliente.historialPagos.find(p => p.fecha === fecha);
+            if (pago) {
+                alert(`Detalles de pago: Monto: $${pago.monto}, Fecha: ${pago.fecha}`);
+            }
+        }
     }
 
     function guardarClientes() {
@@ -396,7 +426,6 @@
         }
     });
 
-    // Sección desplegable
     const coll = document.querySelectorAll(".collapsible");
     coll.forEach((el) => {
         el.addEventListener("click", function() {
