@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pagos y Deudas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header .logo h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        section h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input,
+        form select {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Gestión de Pagos y Deudas</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#formulario">Agregar Pago</a></li>
+                <li><a href="#calendario">Calendario</a></li>
+                <li><a href="#resumen">Resumen Contable</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="formulario">
+        <h2>Formulario para agregar pago</h2>
+        <form>
+            <label for="deudor">Deudor:</label>
+            <input type="text" id="deudor" name="deudor" placeholder="Ej. Juan Pérez" required>
+
+            <label for="monto">Monto de la cuota:</label>
+            <input type="number" id="monto" name="monto" placeholder="Ej. 500" required>
+
+            <label for="fecha">Fecha de pago:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="cuota">Seleccionar cuota:</label>
+            <select id="cuota" name="cuota">
+                <option value="cuota1">Cuota 1</option>
+                <option value="cuota2">Cuota 2</option>
+                <option value="cuota3">Cuota 3</option>
+            </select>
+
+            <button type="submit">Guardar Pago</button>
+        </form>
+    </section>
+
+    <section id="calendario">
+        <h2>Calendario de Pagos</h2>
+        <p>Calendario interactivo aquí (para implementarlo usarías JavaScript o librerías como FullCalendar)</p>
+    </section>
+
+    <section id="resumen">
+        <h2>Resumen Contable</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Deudor</th>
+                    <th>Monto pendiente</th>
+                    <th>Monto pagado</th>
+                    <th>Saldo total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Pérez</td>
+                    <td>$500</td>
+                    <td>$150</td>
+                    <td>$350</td>
+                </tr>
+                <tr>
+                    <td>Ana García</td>
+                    <td>$300</td>
+                    <td>$300</td>
+                    <td>$0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Gestión de Pagos y Deudas</p>
+    </footer>
+</body>
+</html>
