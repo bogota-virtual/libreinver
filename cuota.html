@@ -181,59 +181,64 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#formulario">Agregar Pago</a></li>
-                <li><a href="#calendario">Calendario</a></li>
+                <li><a href="#formularioCliente">Agregar Cliente</a></li>
+                <li><a href="#formularioPago">Registrar Pago</a></li>
                 <li><a href="#resumen">Resumen Contable</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="formulario">
-        <h2>Formulario para agregar pago</h2>
-        <form id="formPago">
-            <label for="deudor">Deudor:</label>
-            <input type="text" id="deudor" name="deudor" placeholder="Ej. Juan Pérez" required>
+    <!-- Formulario para agregar cliente -->
+    <section id="formularioCliente">
+        <h2>Formulario para agregar cliente</h2>
+        <form id="formCliente">
+            <label for="nombreCliente">Nombre del Cliente:</label>
+            <input type="text" id="nombreCliente" name="nombreCliente" placeholder="Ej. Juan Pérez" required>
 
-            <label for="monto">Monto de la cuota:</label>
-            <input type="number" id="monto" name="monto" placeholder="Ej. 500" required>
+            <label for="saldoCliente">Saldo a Pagar:</label>
+            <input type="number" id="saldoCliente" name="saldoCliente" placeholder="Ej. 1000" required>
 
-            <label for="fecha">Fecha de pago:</label>
-            <input type="date" id="fecha" name="fecha" required>
+            <label for="cuotaCliente">Cuota Diaria:</label>
+            <input type="number" id="cuotaCliente" name="cuotaCliente" placeholder="Ej. 50" required>
 
-            <label for="cuota">Seleccionar cuota:</label>
-            <select id="cuota" name="cuota">
-                <option value="cuota1">Cuota 1</option>
-                <option value="cuota2">Cuota 2</option>
-                <option value="cuota3">Cuota 3</option>
-            </select>
-
-            <label for="montoPrestado">Monto Prestado:</label>
-            <input type="number" id="montoPrestado" name="montoPrestado" placeholder="Ej. 1000" required>
-
-            <button type="submit">Guardar Pago</button>
+            <button type="submit">Agregar Cliente</button>
         </form>
     </section>
 
-    <section id="calendario">
-        <h2>Calendario de Pagos</h2>
-        <p>Calendario interactivo aquí (para implementarlo usarías JavaScript o librerías como FullCalendar)</p>
+    <!-- Formulario para agregar pago -->
+    <section id="formularioPago">
+        <h2>Formulario para agregar pago</h2>
+        <form id="formPago">
+            <label for="cliente">Seleccionar Cliente:</label>
+            <select id="cliente" name="cliente" required>
+                <option value="">Seleccione un cliente</option>
+            </select>
+
+            <label for="montoPago">Monto de la cuota:</label>
+            <input type="number" id="montoPago" name="montoPago" placeholder="Ej. 50" required>
+
+            <label for="fechaPago">Fecha de pago:</label>
+            <input type="date" id="fechaPago" name="fechaPago" required>
+
+            <button type="submit">Registrar Pago</button>
+        </form>
     </section>
 
+    <!-- Resumen de la deuda de los clientes -->
     <section id="resumen">
         <h2>Resumen Contable</h2>
         <table id="tablaResumen">
             <thead>
                 <tr>
-                    <th>Deudor</th>
-                    <th>Monto prestado</th>
-                    <th>Cuota diaria</th>
-                    <th>Saldo pendiente</th>
-                    <th>Monto pagado</th>
-                    <th>Saldo total</th>
+                    <th>Cliente</th>
+                    <th>Saldo Inicial</th>
+                    <th>Saldo Restante</th>
+                    <th>Cuota Diaria</th>
+                    <th>Pagos Realizados</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Los pagos se agregan dinámicamente aquí -->
+                <!-- Los datos de los clientes y sus saldos se agregarán aquí -->
             </tbody>
         </table>
     </section>
@@ -243,61 +248,98 @@
     </footer>
 
     <script>
-        // Definimos un arreglo vacío para almacenar los pagos
-        let pagos = [];
+        // Array para almacenar los clientes
+        let clientes = [];
+
+        // Función para actualizar el listado de clientes
+        function actualizarClientes() {
+            const selectCliente = document.getElementById("cliente");
+            selectCliente.innerHTML = '<option value="">Seleccione un cliente</option>'; // Limpiar select antes de actualizar
+
+            clientes.forEach(cliente => {
+                const option = document.createElement("option");
+                option.value = cliente.nombre;
+                option.textContent = `${cliente.nombre} - Saldo: $${cliente.saldoRestante}`;
+                selectCliente.appendChild(option);
+            });
+
+            // Actualizar la tabla de resumen contable
+            actualizarResumen();
+        }
 
         // Función para actualizar la tabla de resumen contable
         function actualizarResumen() {
             const tbody = document.querySelector("#tablaResumen tbody");
             tbody.innerHTML = ""; // Limpiar la tabla antes de actualizar
 
-            pagos.forEach(pago => {
+            clientes.forEach(cliente => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${pago.deudor}</td>
-                    <td>$${pago.montoPrestado}</td>
-                    <td>$${(pago.montoPrestado / pago.cuotas).toFixed(2)}</td>
-                    <td>$${pago.saldoPendiente.toFixed(2)}</td>
-                    <td>$${pago.montoPagado}</td>
-                    <td>$${pago.saldoTotal.toFixed(2)}</td>
+                    <td>${cliente.nombre}</td>
+                    <td>$${cliente.saldoInicial}</td>
+                    <td>$${cliente.saldoRestante}</td>
+                    <td>$${cliente.cuotaDiaria}</td>
+                    <td>${cliente.historialPagos.length} pagos</td>
                 `;
                 tbody.appendChild(row);
             });
         }
 
-        // Manejar el envío del formulario de pago
-        document.getElementById("formPago").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar que se recargue la página
+        // Manejo del formulario de cliente
+        document.getElementById("formCliente").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-            const deudor = document.getElementById("deudor").value;
-            const monto = parseFloat(document.getElementById("monto").value);
-            const fecha = document.getElementById("fecha").value;
-            const cuota = document.getElementById("cuota").value;
-            const montoPrestado = parseFloat(document.getElementById("montoPrestado").value);
+            const nombreCliente = document.getElementById("nombreCliente").value;
+            const saldoCliente = parseFloat(document.getElementById("saldoCliente").value);
+            const cuotaCliente = parseFloat(document.getElementById("cuotaCliente").value);
 
-            // Calcular el saldo pendiente
-            const cuotaDiaria = montoPrestado / 30; // Suponemos que el plazo es de 30 días
-            const saldoPendiente = montoPrestado - monto; // Restamos lo que se pagó de lo prestado
-
-            // Crear un nuevo objeto de pago
-            const pago = {
-                deudor,
-                montoPrestado,
-                cuotas: 30, // Suponemos que el préstamo tiene 30 cuotas
-                cuotaDiaria,
-                saldoPendiente,
-                montoPagado: monto,
-                saldoTotal: saldoPendiente
+            // Crear un objeto cliente
+            const nuevoCliente = {
+                nombre: nombreCliente,
+                saldoInicial: saldoCliente,
+                saldoRestante: saldoCliente,
+                cuotaDiaria: cuotaCliente,
+                historialPagos: [] // Array para registrar pagos
             };
 
-            // Agregar el pago al arreglo de pagos
-            pagos.push(pago);
+            // Agregar cliente al array
+            clientes.push(nuevoCliente);
 
             // Limpiar el formulario
-            document.getElementById("formPago").reset();
+            document.getElementById("formCliente").reset();
 
-            // Actualizar la tabla de resumen contable
-            actualizarResumen();
+            // Actualizar la lista de clientes y la tabla
+            actualizarClientes();
+        });
+
+        // Manejo del formulario de pago
+        document.getElementById("formPago").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nombreCliente = document.getElementById("cliente").value;
+            const montoPago = parseFloat(document.getElementById("montoPago").value);
+            const fechaPago = document.getElementById("fechaPago").value;
+
+            // Buscar el cliente seleccionado
+            const cliente = clientes.find(c => c.nombre === nombreCliente);
+
+            if (cliente) {
+                // Restar el pago al saldo restante
+                cliente.saldoRestante -= montoPago;
+
+                // Registrar el pago
+                const pago = {
+                    monto: montoPago,
+                    fecha: fechaPago
+                };
+                cliente.historialPagos.push(pago);
+
+                // Limpiar el formulario
+                document.getElementById("formPago").reset();
+
+                // Actualizar la lista de clientes y la tabla
+                actualizarClientes();
+            }
         });
     </script>
 </body>
