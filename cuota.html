@@ -5,248 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inversiones NicEDaviD - Gestión de Pagos</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        header {
-            background-color: #1c1c1c;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-family: 'Arial', sans-serif;
-            text-transform: uppercase;
-        }
-
-        header h1 span {
-            color: #00bcd4;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #00bcd4;
-        }
-
-        section {
-            padding: 20px;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        section:hover {
-            transform: scale(1.02);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        form label {
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        form input, form select {
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            transition: border 0.3s ease;
-        }
-
-        form input:focus, form select:focus {
-            border-color: #00bcd4;
-        }
-
-        form button {
-            padding: 12px 20px;
-            background-color: #1c1c1c;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: background-color 0.3s;
-        }
-
-        form button:hover {
-            background-color: #00bcd4;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table th, table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-            font-size: 1rem;
-        }
-
-        table th {
-            background-color: #00bcd4;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1c1c1c;
-            color: white;
-            margin-top: 30px;
-            position: relative;
-            width: 100%;
-        }
-
-        /* Responsivo para pantallas pequeñas (móviles) */
-        @media (max-width: 768px) {
-            section {
-                width: 95%;
-                padding: 15px;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul li {
-                text-align: center;
-            }
-
-            table th, table td {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Estilos para los botones futuristas */
-        .futuristic-button {
-            padding: 12px 20px;
-            background: linear-gradient(45deg, #00bcd4, #ff4081);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .futuristic-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
-        }
-
-        .futuristic-button:focus {
-            outline: none;
-        }
-
-        /* Efecto de sección desplegable */
-        .collapsible {
-            background-color: #00bcd4;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            font-size: 1.2rem;
-            border-radius: 10px;
-        }
-
-        .active, .collapsible:hover {
-            background-color: #00796b;
-        }
-
-        .content {
-            padding: 0 20px;
-            display: none;
-            overflow: hidden;
-            background-color: #f9f9f9;
-        }
-
-        /* Hacer que las fechas tengan un formato bonito */
-        .fecha-pago {
-            font-style: italic;
-            color: #4caf50;
-        }
-
-        .saldo-restante {
-            color: #f44336;
-            font-weight: bold;
-        }
-
-        /* Estilo para edición de valores */
-        .editable {
-            background-color: #fffbe7;
-            border: 1px solid #f5c301;
-            padding: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .editable:focus {
-            outline: 2px solid #00bcd4;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; background-color: #f4f4f4; color: #333; }
+        header { background-color: #1c1c1c; color: white; padding: 20px; text-align: center; }
+        header h1 { font-size: 2.5rem; font-family: 'Arial', sans-serif; text-transform: uppercase; }
+        header h1 span { color: #00bcd4; }
+        nav ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px; margin-top: 10px; }
+        nav ul li { display: inline; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: color 0.3s; }
+        nav ul li a:hover { color: #00bcd4; }
+        section { padding: 20px; margin: 20px auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 80%; max-width: 800px; transition: transform 0.3s ease-in-out; }
+        section:hover { transform: scale(1.02); }
+        h2 { font-size: 2rem; margin-bottom: 20px; color: #333; text-align: center; font-weight: bold; }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        form label { font-weight: bold; font-size: 1rem; }
+        form input, form select { padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border 0.3s ease; }
+        form input:focus, form select:focus { border-color: #00bcd4; }
+        form button { padding: 12px 20px; background-color: #1c1c1c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2rem; transition: background-color 0.3s; }
+        form button:hover { background-color: #00bcd4; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table th, table td { padding: 12px; border: 1px solid #ddd; text-align: left; font-size: 1rem; }
+        table th { background-color: #00bcd4; color: white; }
+        table tr:nth-child(even) { background-color: #f9f9f9; }
+        footer { text-align: center; padding: 20px; background-color: #1c1c1c; color: white; margin-top: 30px; position: relative; width: 100%; }
+        .collapsible { background-color: #00bcd4; color: white; cursor: pointer; padding: 10px; width: 100%; border: none; text-align: left; font-size: 1.2rem; border-radius: 10px; }
+        .active, .collapsible:hover { background-color: #00796b; }
+        .content { padding: 0 20px; display: none; overflow: hidden; background-color: #f9f9f9; }
+        .fecha-pago { font-style: italic; color: #4caf50; }
+        .saldo-restante { color: #f44336; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -262,24 +48,19 @@
     </nav>
 </header>
 
-<!-- Formulario para agregar cliente -->
 <section id="formularioCliente">
     <h2>Formulario para agregar cliente</h2>
     <form id="formCliente">
         <label for="nombreCliente">Nombre del Cliente:</label>
         <input type="text" id="nombreCliente" name="nombreCliente" placeholder="Ej. Juan Pérez" required>
-
         <label for="saldoCliente">Saldo a Pagar:</label>
         <input type="number" id="saldoCliente" name="saldoCliente" placeholder="Ej. 1000" required>
-
         <label for="cuotaCliente">Cuota Diaria:</label>
         <input type="number" id="cuotaCliente" name="cuotaCliente" placeholder="Ej. 50" required>
-
         <button type="submit" class="futuristic-button">Agregar Cliente</button>
     </form>
 </section>
 
-<!-- Formulario para agregar pago -->
 <section id="formularioPago">
     <h2>Formulario para agregar pago</h2>
     <form id="formPago">
@@ -287,18 +68,14 @@
         <select id="cliente" name="cliente" required>
             <option value="">Seleccione un cliente</option>
         </select>
-
         <label for="montoPago">Monto de la cuota:</label>
         <input type="number" id="montoPago" name="montoPago" placeholder="Ej. 50" required>
-
         <label for="fechaPago">Fecha de pago:</label>
         <input type="date" id="fechaPago" name="fechaPago" required>
-
         <button type="submit" class="futuristic-button">Registrar Pago</button>
     </form>
 </section>
 
-<!-- Resumen de la deuda de los clientes -->
 <section id="resumen">
     <h2>Resumen Contable</h2>
     <button type="button" class="collapsible">Mostrar Resumen de Pagos</button>
@@ -331,14 +108,12 @@
     function actualizarClientes() {
         const selectCliente = document.getElementById("cliente");
         selectCliente.innerHTML = '<option value="">Seleccione un cliente</option>';
-
         clientes.forEach(cliente => {
             const option = document.createElement("option");
             option.value = cliente.nombre;
             option.textContent = `${cliente.nombre} - Saldo: $${cliente.saldoRestante}`;
             selectCliente.appendChild(option);
         });
-
         actualizarResumen();
     }
 
@@ -347,15 +122,13 @@
         tbody.innerHTML = "";
 
         clientes.forEach(cliente => {
-            const pagosFechas = cliente.historialPagos.map(pago => `
-                <span class="fecha-pago" onclick="verDetallesPago('${cliente.nombre}', '${pago.fecha}')">${pago.fecha}</span>
-            `).join(", ");
+            const pagosFechas = cliente.historialPagos.map(pago => `<span class="fecha-pago">${pago.fecha}</span>`).join(", ");
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'nombre', this.innerText)">${cliente.nombre}</td>
-                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'saldoInicial', parseFloat(this.innerText))">${cliente.saldoInicial}</td>
-                <td class="saldo-restante">$${cliente.saldoRestante}</td>
-                <td contenteditable="true" class="editable" onblur="editarCliente('${cliente.nombre}', 'cuotaDiaria', parseFloat(this.innerText))">${cliente.cuotaDiaria}</td>
+                <td>${cliente.nombre}</td>
+                <td><input type="number" value="${cliente.saldoInicial}" onchange="editarSaldoInicial('${cliente.nombre}', this.value)"></td>
+                <td><input type="number" value="${cliente.saldoRestante}" onchange="editarSaldoRestante('${cliente.nombre}', this.value)"></td>
+                <td><input type="number" value="${cliente.cuotaDiaria}" onchange="editarCuotaDiaria('${cliente.nombre}', this.value)"></td>
                 <td>${cliente.historialPagos.length} pagos</td>
                 <td>${pagosFechas}</td>
             `;
@@ -363,26 +136,36 @@
         });
     }
 
-    function editarCliente(nombre, campo, valor) {
-        const cliente = clientes.find(c => c.nombre === nombre);
-        if (cliente) {
-            cliente[campo] = valor;
-            guardarClientes();
-        }
-    }
-
-    function verDetallesPago(clienteNombre, fecha) {
-        const cliente = clientes.find(c => c.nombre === clienteNombre);
-        if (cliente) {
-            const pago = cliente.historialPagos.find(p => p.fecha === fecha);
-            if (pago) {
-                alert(`Detalles de pago: Monto: $${pago.monto}, Fecha: ${pago.fecha}`);
-            }
-        }
-    }
-
     function guardarClientes() {
         localStorage.setItem('clientes', JSON.stringify(clientes));
+    }
+
+    function editarSaldoInicial(nombre, valor) {
+        const cliente = clientes.find(c => c.nombre === nombre);
+        if (cliente) {
+            cliente.saldoInicial = parseFloat(valor);
+            cliente.saldoRestante = cliente.saldoInicial;
+            guardarClientes();
+            actualizarClientes();
+        }
+    }
+
+    function editarSaldoRestante(nombre, valor) {
+        const cliente = clientes.find(c => c.nombre === nombre);
+        if (cliente) {
+            cliente.saldoRestante = parseFloat(valor);
+            guardarClientes();
+            actualizarClientes();
+        }
+    }
+
+    function editarCuotaDiaria(nombre, valor) {
+        const cliente = clientes.find(c => c.nombre === nombre);
+        if (cliente) {
+            cliente.cuotaDiaria = parseFloat(valor);
+            guardarClientes();
+            actualizarClientes();
+        }
     }
 
     document.getElementById("formCliente").addEventListener("submit", function(event) {
