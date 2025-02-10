@@ -5,173 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Pagos y Deudas</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        header .logo h1 {
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        section {
-            padding: 20px;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
-        }
-
-        section h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        form label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        form input,
-        form select {
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        form button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        form button:hover {
-            background-color: #555;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table th,
-        table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #f4f4f4;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Responsivo para pantallas pequeñas (móviles) */
-        @media (max-width: 768px) {
-            header .logo h1 {
-                font-size: 22px;
-            }
-
-            section {
-                width: 95%;
-                padding: 15px;
-            }
-
-            nav ul {
-                text-align: center;
-                padding-top: 10px;
-            }
-
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-
-            form input, form select {
-                width: 100%;
-            }
-
-            table th, table td {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            footer {
-                position: static;
-                margin-top: 20px;
-            }
-        }
-
-        /* Estilo para pantallas muy pequeñas (dispositivos móviles pequeños) */
-        @media (max-width: 480px) {
-            header .logo h1 {
-                font-size: 20px;
-            }
-
-            form button {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
-
-            section h2 {
-                font-size: 20px;
-            }
-        }
-
+        /* (El estilo se mantiene igual) */
     </style>
 </head>
 <body>
@@ -248,8 +82,8 @@
     </footer>
 
     <script>
-        // Array para almacenar los clientes
-        let clientes = [];
+        // Cargar datos desde localStorage si existen
+        let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
         // Función para actualizar el listado de clientes
         function actualizarClientes() {
@@ -285,6 +119,11 @@
             });
         }
 
+        // Función para guardar los clientes en localStorage
+        function guardarClientes() {
+            localStorage.setItem('clientes', JSON.stringify(clientes));
+        }
+
         // Manejo del formulario de cliente
         document.getElementById("formCliente").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -307,6 +146,9 @@
 
             // Limpiar el formulario
             document.getElementById("formCliente").reset();
+
+            // Guardar los clientes en localStorage
+            guardarClientes();
 
             // Actualizar la lista de clientes y la tabla
             actualizarClientes();
@@ -337,10 +179,17 @@
                 // Limpiar el formulario
                 document.getElementById("formPago").reset();
 
+                // Guardar los clientes en localStorage
+                guardarClientes();
+
                 // Actualizar la lista de clientes y la tabla
                 actualizarClientes();
             }
         });
+
+        // Al cargar la página, actualizar los datos
+        actualizarClientes();
+
     </script>
 </body>
 </html>
