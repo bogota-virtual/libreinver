@@ -137,7 +137,7 @@
 
     <section id="formulario">
         <h2>Formulario para agregar pago</h2>
-        <form>
+        <form id="formPago">
             <label for="deudor">Deudor:</label>
             <input type="text" id="deudor" name="deudor" placeholder="Ej. Juan Pérez" required>
 
@@ -165,7 +165,7 @@
 
     <section id="resumen">
         <h2>Resumen Contable</h2>
-        <table>
+        <table id="tablaResumen">
             <thead>
                 <tr>
                     <th>Deudor</th>
@@ -175,18 +175,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Juan Pérez</td>
-                    <td>$500</td>
-                    <td>$150</td>
-                    <td>$350</td>
-                </tr>
-                <tr>
-                    <td>Ana García</td>
-                    <td>$300</td>
-                    <td>$300</td>
-                    <td>$0</td>
-                </tr>
+                <!-- Los pagos se agregan dinámicamente aquí -->
             </tbody>
         </table>
     </section>
@@ -194,5 +183,57 @@
     <footer>
         <p>&copy; 2025 Gestión de Pagos y Deudas</p>
     </footer>
+
+    <script>
+        // Definimos un arreglo vacío para almacenar los pagos
+        let pagos = [];
+
+        // Función para actualizar la tabla de resumen contable
+        function actualizarResumen() {
+            const tbody = document.querySelector("#tablaResumen tbody");
+            tbody.innerHTML = ""; // Limpiar la tabla antes de actualizar
+
+            pagos.forEach(pago => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${pago.deudor}</td>
+                    <td>$${pago.montoPendiente}</td>
+                    <td>$${pago.montoPagado}</td>
+                    <td>$${pago.saldoTotal}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Manejar el envío del formulario de pago
+        document.getElementById("formPago").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar que se recargue la página
+
+            const deudor = document.getElementById("deudor").value;
+            const monto = parseFloat(document.getElementById("monto").value);
+            const fecha = document.getElementById("fecha").value;
+            const cuota = document.getElementById("cuota").value;
+
+            // Crear un nuevo objeto de pago
+            const pago = {
+                deudor,
+                montoPendiente: monto,
+                montoPagado: 0, // Asumimos que el pago inicial es 0
+                saldoTotal: monto,
+                fecha,
+                cuota
+            };
+
+            // Agregar el pago al arreglo de pagos
+            pagos.push(pago);
+
+            // Limpiar el formulario
+            document.getElementById("formPago").reset();
+
+            // Actualizar la tabla de resumen contable
+            actualizarResumen();
+        });
+    </script>
 </body>
 </html>
+
