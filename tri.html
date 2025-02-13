@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créditos y Tarjetas - Bancolombia</title>
+    <title>Tarjetas de Crédito - Bancolombia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,127 +11,16 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        .header {
-            background-color: #0033a0;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-        .section {
-            background: white;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .section img {
-            width: 100%;
-            max-width: 400px;
-            object-fit: cover;
-        }
-        .section-content {
-            padding: 20px;
-            flex: 1;
-        }
-        .section-content h2 {
-            color: #0033a0;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            color: white;
-            background: #007bff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        @media (max-width: 768px) {
-            .section {
-                flex-direction: column;
-            }
-            .section img {
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Créditos y Tarjetas - Bancolombia</h1>
-    </div>
-    <div class="container">
-        <div class="section">
-            <img src="ruta_a_tu_imagen/credito_consumo.jpg" alt="Crédito de Consumo">
-            <div class="section-content">
-                <h2>Crédito de Consumo</h2>
-                <p>Solicita tu crédito de consumo de forma rápida y sencilla.</p>
-                <a class="button" href="https://www.google.com" target="_blank">Más información</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <img src="ruta_a_tu_imagen/crediagil.jpg" alt="Crediágil">
-            <div class="section-content">
-                <h2>Crediágil</h2>
-                <p>Una solución financiera flexible para tus necesidades inmediatas.</p>
-                <a class="button" href="https://www.google.com" target="_blank">Más información</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <img src="ruta_a_tu_imagen/compra_cartera.jpg" alt="Compra de Cartera">
-            <div class="section-content">
-                <h2>Compra de Cartera</h2>
-                <p>Transfiere tu deuda y obtén mejores tasas de interés.</p>
-                <a class="button" href="https://www.google.com" target="_blank">Más información</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <img src="ruta_a_tu_imagen/credito_libre_inversion.jpg" alt="Crédito Libre Inversión">
-            <div class="section-content">
-                <h2>Crédito Libre Inversión</h2>
-                <p>Financia tus proyectos con un crédito de libre inversión.</p>
-                <a class="button" href="https://www.google.com" target="_blank">Más información</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <img src="ruta_a_tu_imagen/tarjetas_credito.jpg" alt="Tarjetas de Crédito">
-            <div class="section-content">
-                <h2>Tarjetas de Crédito Bancolombia</h2>
-                <p>Descubre todas las tarjetas de crédito que Bancolombia tiene para ti.</p>
-                <a class="button" href="https://www.google.com" target="_blank">Más información</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjetas de Crédito - Bancolombia</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
         header {
             background-color: #0033a0;
             color: white;
             padding: 1em;
             text-align: center;
+        }
+        header img {
+            width: 150px;
+            display: block;
+            margin: 0 auto;
         }
         nav ul {
             list-style-type: none;
@@ -145,6 +34,7 @@
         nav ul li a {
             color: white;
             text-decoration: none;
+            font-weight: bold;
         }
         main {
             padding: 1em;
@@ -154,27 +44,39 @@
             margin-bottom: 2em;
         }
         h2 {
-            border-bottom: 2px solid #0033a0;
+            border-bottom: 3px solid #ffc107;
             padding-bottom: 0.5em;
             text-align: center;
+            color: #0033a0;
         }
         .tarjeta {
             display: inline-block;
             width: 300px;
             margin: 1em;
             padding: 1em;
-            border: 1px solid #ddd;
             border-radius: 10px;
             text-align: center;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            background-color: white;
         }
         .tarjeta img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
+        .boton {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #0033a0;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
         footer {
-            background-color: #f1f1f1;
+            background-color: #0033a0;
+            color: white;
             text-align: center;
             padding: 1em;
             margin-top: 2em;
@@ -183,6 +85,7 @@
 </head>
 <body>
     <header>
+        <img src="bancolombia-logo.png" alt="Bancolombia Logo">
         <h1>Tarjetas de Crédito Bancolombia</h1>
         <nav>
             <ul>
@@ -200,6 +103,7 @@
                 <img src="visa-infinite.jpg" alt="Visa Infinite">
                 <h3>Visa Infinite</h3>
                 <p>Beneficios exclusivos como acceso a salas VIP y seguros de viaje.</p>
+                <a href="#" class="boton">Más información</a>
             </div>
         </section>
         <section id="mastercard">
@@ -208,6 +112,7 @@
                 <img src="mastercard-unica.jpg" alt="Mastercard Única">
                 <h3>Mastercard Única</h3>
                 <p>Tarjeta 100% virtual para compras en línea y en comercios físicos.</p>
+                <a href="#" class="boton">Más información</a>
             </div>
         </section>
         <section id="american-express">
@@ -216,6 +121,7 @@
                 <img src="american-express-libre.jpg" alt="American Express Libre">
                 <h3>American Express Libre</h3>
                 <p>Sin cuota de manejo con beneficios exclusivos.</p>
+                <a href="#" class="boton">Más información</a>
             </div>
         </section>
         <section id="diners-club">
@@ -224,6 +130,7 @@
                 <img src="diners-club.jpg" alt="Diners Club">
                 <h3>Diners Club</h3>
                 <p>Ofrece experiencias premium y descuentos exclusivos.</p>
+                <a href="#" class="boton">Más información</a>
             </div>
         </section>
     </main>
