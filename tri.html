@@ -114,3 +114,131 @@
     </div>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Crédito - Bancolombia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0033a0;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 1em;
+            text-align: center;
+        }
+        section {
+            margin-bottom: 2em;
+        }
+        h2 {
+            border-bottom: 2px solid #0033a0;
+            padding-bottom: 0.5em;
+            text-align: center;
+        }
+        .tarjeta {
+            display: inline-block;
+            width: 300px;
+            margin: 1em;
+            padding: 1em;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .tarjeta img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 1em;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tarjetas de Crédito Bancolombia</h1>
+        <nav>
+            <ul>
+                <li><a href="#visa">Visa</a></li>
+                <li><a href="#mastercard">Mastercard</a></li>
+                <li><a href="#american-express">American Express</a></li>
+                <li><a href="#diners-club">Diners Club</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="visa">
+            <h2>Tarjetas Visa</h2>
+            <div class="tarjeta">
+                <img src="visa-infinite.jpg" alt="Visa Infinite">
+                <h3>Visa Infinite</h3>
+                <p>Beneficios exclusivos como acceso a salas VIP y seguros de viaje.</p>
+            </div>
+        </section>
+        <section id="mastercard">
+            <h2>Tarjetas Mastercard</h2>
+            <div class="tarjeta">
+                <img src="mastercard-unica.jpg" alt="Mastercard Única">
+                <h3>Mastercard Única</h3>
+                <p>Tarjeta 100% virtual para compras en línea y en comercios físicos.</p>
+            </div>
+        </section>
+        <section id="american-express">
+            <h2>Tarjetas American Express</h2>
+            <div class="tarjeta">
+                <img src="american-express-libre.jpg" alt="American Express Libre">
+                <h3>American Express Libre</h3>
+                <p>Sin cuota de manejo con beneficios exclusivos.</p>
+            </div>
+        </section>
+        <section id="diners-club">
+            <h2>Tarjetas Diners Club</h2>
+            <div class="tarjeta">
+                <img src="diners-club.jpg" alt="Diners Club">
+                <h3>Diners Club</h3>
+                <p>Ofrece experiencias premium y descuentos exclusivos.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Bancolombia. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
